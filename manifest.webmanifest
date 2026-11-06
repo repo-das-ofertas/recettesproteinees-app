@@ -1,0 +1,32 @@
+{
+  "id": "/recettesproteinees-app/",
+  "name": "150 recettes protéinées pas chères",
+  "short_name": "150 recettes",
+  "lang": "fr-FR",
+  "description": "Assez de protéines sans se ruiner : recettes de supermarché, macros et coût estimé, sans poudre de protéines de lactosérum ajoutée. Favoris et liste de courses sur cet appareil.",
+  "start_url": "/recettesproteinees-app/",
+  "scope": "/recettesproteinees-app/",
+  "display": "standalone",
+  "background_color": "#f7f6f0",
+  "theme_color": "#234d3b",
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

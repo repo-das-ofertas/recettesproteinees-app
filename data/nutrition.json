@@ -1,0 +1,1454 @@
+{
+  "avoine": {
+    "id": "avoine",
+    "nom": "flocons d’avoine",
+    "ciqual_code": 32140,
+    "ciqual_nom": "Flocons d'avoine",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "gluten"
+    ],
+    "kcal": {
+      "bas": 369.0,
+      "haut": 369.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 11.4,
+      "haut": 11.4,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 57.7,
+      "haut": 57.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 7.82,
+      "haut": 7.82,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "369",
+      "proteines": "11,4",
+      "glucides": "57,7",
+      "lipides": "7,82"
+    }
+  },
+  "fromage": {
+    "id": "fromage",
+    "nom": "fromage blanc nature à 3 % MG",
+    "ciqual_code": 19646,
+    "ciqual_nom": "Fromage blanc, nature, 2-3% MG",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "lait"
+    ],
+    "kcal": {
+      "bas": 75.7,
+      "haut": 75.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 7.13,
+      "haut": 7.13,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 3.86,
+      "haut": 3.86,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 3.23,
+      "haut": 3.23,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "75,7",
+      "proteines": "7,13",
+      "glucides": "3,86",
+      "lipides": "3,23"
+    }
+  },
+  "oeuf": {
+    "id": "oeuf",
+    "nom": "œufs sans coquille",
+    "ciqual_code": 22000,
+    "ciqual_nom": "Oeuf cru",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "œuf"
+    ],
+    "kcal": {
+      "bas": 140.0,
+      "haut": 140.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 12.8,
+      "haut": 12.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.06,
+      "haut": 0.06,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 9.83,
+      "haut": 9.83,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "140",
+      "proteines": "12,8",
+      "glucides": "0,06",
+      "lipides": "9,83"
+    }
+  },
+  "poulet": {
+    "id": "poulet",
+    "nom": "filet de poulet cru sans peau",
+    "ciqual_code": 36017,
+    "ciqual_nom": "Poulet, filet sans peau cru",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 110.0,
+      "haut": 110.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 23.4,
+      "haut": 23.4,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 1.5,
+      "haut": 1.5,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "110",
+      "proteines": "23,4",
+      "glucides": "0",
+      "lipides": "1,5"
+    }
+  },
+  "lentille": {
+    "id": "lentille",
+    "nom": "lentilles vertes sèches",
+    "ciqual_code": 20585,
+    "ciqual_nom": "Lentille verte, sèche",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 327.0,
+      "haut": 327.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 25.1,
+      "haut": 25.1,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 44.5,
+      "haut": 44.5,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 1.8,
+      "haut": 1.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "327",
+      "proteines": "25,1",
+      "glucides": "44,5",
+      "lipides": "1,8"
+    }
+  },
+  "corail": {
+    "id": "corail",
+    "nom": "lentilles corail sèches",
+    "ciqual_code": 20535,
+    "ciqual_nom": "Lentille corail, sèche",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 328.0,
+      "haut": 328.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 27.7,
+      "haut": 27.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 44.9,
+      "haut": 44.9,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.8,
+      "haut": 0.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "328",
+      "proteines": "27,7",
+      "glucides": "44,9",
+      "lipides": "0,8"
+    }
+  },
+  "riz": {
+    "id": "riz",
+    "nom": "riz blanc étuvé sec",
+    "ciqual_code": 9101,
+    "ciqual_nom": "Riz blanc étuvé, cru",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 361.0,
+      "haut": 361.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 7.69,
+      "haut": 7.69,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 79.4,
+      "haut": 79.4,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 1.02,
+      "haut": 1.02,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "361",
+      "proteines": "7,69",
+      "glucides": "79,4",
+      "lipides": "1,02"
+    }
+  },
+  "couscous": {
+    "id": "couscous",
+    "nom": "couscous moyen sec",
+    "ciqual_code": 9681,
+    "ciqual_nom": "Graine de couscous (semoule de blé dur précuite), à cuire",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "gluten"
+    ],
+    "kcal": {
+      "bas": 366.0,
+      "haut": 366.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 13.5,
+      "haut": 13.5,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 72.7,
+      "haut": 72.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 1.32,
+      "haut": 1.32,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "366",
+      "proteines": "13,5",
+      "glucides": "72,7",
+      "lipides": "1,32"
+    }
+  },
+  "carotte": {
+    "id": "carotte",
+    "nom": "carottes crues lavées, parées",
+    "ciqual_code": 20009,
+    "ciqual_nom": "Carotte, crue",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 30.2,
+      "haut": 30.2,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 0.78,
+      "haut": 0.78,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 5.16,
+      "haut": 5.16,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.0,
+      "haut": 0.5,
+      "qualificatif": "limite supérieure stricte, intervalle conservateur"
+    },
+    "valeurs_brutes": {
+      "kcal": "30,2",
+      "proteines": "0,78",
+      "glucides": "5,16",
+      "lipides": "< 0,5"
+    }
+  },
+  "courgette": {
+    "id": "courgette",
+    "nom": "courgettes crues avec peau, parées",
+    "ciqual_code": 20020,
+    "ciqual_nom": "Courgette, chair et peau, crue",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 16.7,
+      "haut": 16.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 1.21,
+      "haut": 1.21,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 1.75,
+      "haut": 1.75,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.32,
+      "haut": 0.32,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "16,7",
+      "proteines": "1,21",
+      "glucides": "1,75",
+      "lipides": "0,32"
+    }
+  },
+  "champignon": {
+    "id": "champignon",
+    "nom": "champignons de Paris crus, parés",
+    "ciqual_code": 20056,
+    "ciqual_nom": "Champignon de Paris ou champignon de couche, cru",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 21.0,
+      "haut": 21.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 2.11,
+      "haut": 2.11,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 1.83,
+      "haut": 1.83,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.36,
+      "haut": 0.36,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "21",
+      "proteines": "2,11",
+      "glucides": "1,83",
+      "lipides": "0,36"
+    }
+  },
+  "tomate": {
+    "id": "tomate",
+    "nom": "tomates en grappe crues, parées",
+    "ciqual_code": 20584,
+    "ciqual_nom": "Tomate grappe, crue",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 19.8,
+      "haut": 19.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 0.5,
+      "haut": 0.5,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 3.67,
+      "haut": 3.67,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.0,
+      "haut": 0.5,
+      "qualificatif": "limite supérieure stricte, intervalle conservateur"
+    },
+    "valeurs_brutes": {
+      "kcal": "19,8",
+      "proteines": "0,5",
+      "glucides": "3,67",
+      "lipides": "< 0,5"
+    }
+  },
+  "pomme": {
+    "id": "pomme",
+    "nom": "pomme Golden avec peau, sans trognon",
+    "ciqual_code": 13620,
+    "ciqual_nom": "Pomme Golden, chair et peau, crue",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 54.1,
+      "haut": 54.1,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 0.25,
+      "haut": 0.25,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 12.8,
+      "haut": 12.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.0,
+      "haut": 0.5,
+      "qualificatif": "limite supérieure stricte, intervalle conservateur"
+    },
+    "valeurs_brutes": {
+      "kcal": "54,1",
+      "proteines": "0,25",
+      "glucides": "12,8",
+      "lipides": "< 0,5"
+    }
+  },
+  "huile": {
+    "id": "huile",
+    "nom": "huile de colza",
+    "ciqual_code": 17130,
+    "ciqual_nom": "Huile de colza",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 900.0,
+      "haut": 900.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 100.0,
+      "haut": 100.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "900",
+      "proteines": "0",
+      "glucides": "0",
+      "lipides": "100"
+    }
+  },
+  "tofu": {
+    "id": "tofu",
+    "nom": "tofu nature",
+    "ciqual_code": 20904,
+    "ciqual_nom": "Tofu nature, préemballé",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "soja"
+    ],
+    "kcal": {
+      "bas": 147.0,
+      "haut": 147.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 14.7,
+      "haut": 14.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 2.87,
+      "haut": 2.87,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 8.5,
+      "haut": 8.5,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "147",
+      "proteines": "14,7",
+      "glucides": "2,87",
+      "lipides": "8,5"
+    }
+  },
+  "cacao": {
+    "id": "cacao",
+    "nom": "cacao en poudre non sucré",
+    "ciqual_code": 18100,
+    "ciqual_nom": "Cacao, sans sucres ajoutés, poudre soluble",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 387.0,
+      "haut": 387.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 22.4,
+      "haut": 22.4,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 11.6,
+      "haut": 11.6,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 20.6,
+      "haut": 20.6,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "387",
+      "proteines": "22,4",
+      "glucides": "11,6",
+      "lipides": "20,6"
+    }
+  },
+  "paprika": {
+    "id": "paprika",
+    "nom": "paprika doux",
+    "ciqual_code": 11049,
+    "ciqual_nom": "Paprika, poudre",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 318.0,
+      "haut": 318.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 14.1,
+      "haut": 14.1,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 18.8,
+      "haut": 18.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 12.9,
+      "haut": 12.9,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "318",
+      "proteines": "14,1",
+      "glucides": "18,8",
+      "lipides": "12,9"
+    }
+  },
+  "sel": {
+    "id": "sel",
+    "nom": "sel fin",
+    "ciqual_code": 11096,
+    "ciqual_nom": "Sel blanc alimentaire, iodé, fluoré à 25 mg /100 g (marin, ignigène ou gemme)",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "kcal": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "0",
+      "proteines": "0",
+      "glucides": "0",
+      "lipides": "0"
+    }
+  },
+  "lait": {
+    "id": "lait",
+    "nom": "lait demi-écrémé UHT",
+    "ciqual_code": 19041,
+    "ciqual_nom": "Lait demi-écrémé, UHT",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "lait"
+    ],
+    "notes_correspondance": "Conversion modélisée 1 L = 1 030 g, densité supposée 1,03 g/mL.",
+    "kcal": {
+      "bas": 47.7,
+      "haut": 47.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 3.41,
+      "haut": 3.41,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 5.0,
+      "haut": 5.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 1.56,
+      "haut": 1.56,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "47,7",
+      "proteines": "3,41",
+      "glucides": "5",
+      "lipides": "1,56"
+    }
+  },
+  "fromage0": {
+    "id": "fromage0",
+    "nom": "fromage blanc nature 0 % MG",
+    "ciqual_code": 19644,
+    "ciqual_nom": "Fromage blanc, nature, 0% MG",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "lait"
+    ],
+    "notes_correspondance": "Aliment générique fromage blanc 0%, et non skyr.",
+    "kcal": {
+      "bas": 48.4,
+      "haut": 48.4,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 7.19,
+      "haut": 7.19,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 4.22,
+      "haut": 4.22,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.0,
+      "haut": 0.1,
+      "qualificatif": "limite supérieure stricte, intervalle conservateur"
+    },
+    "valeurs_brutes": {
+      "kcal": "48,4",
+      "proteines": "7,19",
+      "glucides": "4,22",
+      "lipides": "< 0,1"
+    }
+  },
+  "poire": {
+    "id": "poire",
+    "nom": "poire avec peau, sans trognon",
+    "ciqual_code": 13037,
+    "ciqual_nom": "Poire, chair et peau, crue",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Rendement après trognon supposé 90 %.",
+    "kcal": {
+      "bas": 56.6,
+      "haut": 56.6,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 0.36,
+      "haut": 0.36,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 12.3,
+      "haut": 12.3,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.27,
+      "haut": 0.27,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "56,6",
+      "proteines": "0,36",
+      "glucides": "12,3",
+      "lipides": "0,27"
+    }
+  },
+  "framboise": {
+    "id": "framboise",
+    "nom": "framboises surgelées non sucrées",
+    "ciqual_code": 13015,
+    "ciqual_nom": "Framboise, crue",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "CIQUAL framboise crue utilisée comme APPROXIMATION déclarée: code surgelé 13136 sans énergie publiée. Pas d’imputation zéro ni de mélange avec le tableau erroné de la page marchande. Jus conservé après cuisson.",
+    "kcal": {
+      "bas": 47.9,
+      "haut": 47.9,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 1.19,
+      "haut": 1.19,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 5.83,
+      "haut": 5.83,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.8,
+      "haut": 0.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "47,9",
+      "proteines": "1,19",
+      "glucides": "5,83",
+      "lipides": "0,8"
+    }
+  },
+  "chiche": {
+    "id": "chiche",
+    "nom": "pois chiches en conserve, égouttés",
+    "ciqual_code": 20532,
+    "ciqual_nom": "Pois chiche, appertisé, égoutté",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Masse égouttée 530 g corroborée par fiche Carrefour https://www.carrefour.fr/p/pois-chiches-carrefour-classic-3560070329410 .",
+    "kcal": {
+      "bas": 122.0,
+      "haut": 122.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 6.74,
+      "haut": 6.74,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 15.0,
+      "haut": 15.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 2.68,
+      "haut": 2.68,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "122",
+      "proteines": "6,74",
+      "glucides": "15",
+      "lipides": "2,68"
+    }
+  },
+  "haricot": {
+    "id": "haricot",
+    "nom": "haricots rouges en conserve, égouttés",
+    "ciqual_code": 20524,
+    "ciqual_nom": "Haricot rouge, appertisé, égoutté",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "CIQUAL 20524, haricot rouge en conserve égoutté. Poids de recette inchangé. Emballage publié net 400 g / égoutté 240 g; ce sont les données du fabricant, pas une pesée physique.",
+    "kcal": {
+      "bas": 108.0,
+      "haut": 108.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 8.31,
+      "haut": 8.31,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 13.0,
+      "haut": 13.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.97,
+      "haut": 0.97,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "108",
+      "proteines": "8,31",
+      "glucides": "13",
+      "lipides": "0,97"
+    }
+  },
+  "thon": {
+    "id": "thon",
+    "nom": "thon au naturel en conserve, égoutté",
+    "ciqual_code": 26039,
+    "ciqual_nom": "Thon, au naturel, appertisé, égoutté",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "poisson"
+    ],
+    "notes_correspondance": "Prix payé pour toute la boîte, rapporté au poids net égoutté.",
+    "kcal": {
+      "bas": 143.0,
+      "haut": 143.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 26.8,
+      "haut": 26.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 3.94,
+      "haut": 3.94,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "143",
+      "proteines": "26,8",
+      "glucides": "0",
+      "lipides": "3,94"
+    }
+  },
+  "sardine": {
+    "id": "sardine",
+    "nom": "sardines à l’huile de tournesol, égouttées",
+    "ciqual_code": 26697,
+    "ciqual_nom": "Sardine, à l'huile de tournesol, appertisée, égouttée",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "poisson"
+    ],
+    "notes_correspondance": "Ne pas compter l’huile égouttée comme huile de cuisson supplémentaire.",
+    "kcal": {
+      "bas": 219.0,
+      "haut": 219.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 23.5,
+      "haut": 23.5,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.27,
+      "haut": 0.27,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 13.8,
+      "haut": 13.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "219",
+      "proteines": "23,5",
+      "glucides": "0,27",
+      "lipides": "13,8"
+    }
+  },
+  "maquereau": {
+    "id": "maquereau",
+    "nom": "maquereau au naturel en conserve, égoutté",
+    "ciqual_code": 26123,
+    "ciqual_nom": "Maquereau, filet (grillé ou non), au naturel, appertisé, égoutté",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "poisson"
+    ],
+    "notes_correspondance": "Ne pas remplacer par une sauce moutarde sans recalculer.",
+    "kcal": {
+      "bas": 221.0,
+      "haut": 221.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 18.8,
+      "haut": 18.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.018,
+      "haut": 0.018,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 16.2,
+      "haut": 16.2,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "221",
+      "proteines": "18,8",
+      "glucides": "0,018",
+      "lipides": "16,2"
+    }
+  },
+  "brocoli": {
+    "id": "brocoli",
+    "nom": "brocolis précuits surgelés",
+    "ciqual_code": 20204,
+    "ciqual_nom": "Brocoli, surgelé, cru",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Correspondance APPROXIMATIVE avec brocoli surgelé cru CIQUAL (produit commercial blanchi/précuit); pas une analyse de cette marque. Titre/image du fetch incohérents, corps/URL cohérents.",
+    "kcal": {
+      "bas": 26.4,
+      "haut": 26.4,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 2.78,
+      "haut": 2.78,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 1.5,
+      "haut": 1.5,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.42,
+      "haut": 0.42,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "26,4",
+      "proteines": "2,78",
+      "glucides": "1,5",
+      "lipides": "0,42"
+    }
+  },
+  "epinard": {
+    "id": "epinard",
+    "nom": "épinards hachés surgelés nature",
+    "ciqual_code": 20083,
+    "ciqual_nom": "Epinard, haché ou purée ou en branches, surgelé, cru",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Prix affiché «prix soldé», sans durée de validité vérifiée; non garanti. Pas de version à la crème.",
+    "kcal": {
+      "bas": 28.0,
+      "haut": 28.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 3.32,
+      "haut": 3.32,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 1.0,
+      "haut": 1.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.54,
+      "haut": 0.54,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "28",
+      "proteines": "3,32",
+      "glucides": "1",
+      "lipides": "0,54"
+    }
+  },
+  "patate": {
+    "id": "patate",
+    "nom": "pommes de terre crues épluchées",
+    "ciqual_code": 4008,
+    "ciqual_nom": "Pomme de terre, sans peau, crue",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Épluchage/parage supposé 15 %.",
+    "kcal": {
+      "bas": 80.0,
+      "haut": 80.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 2.02,
+      "haut": 2.02,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 16.2,
+      "haut": 16.2,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.09,
+      "haut": 0.09,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "80",
+      "proteines": "2,02",
+      "glucides": "16,2",
+      "lipides": "0,09"
+    }
+  },
+  "oignon": {
+    "id": "oignon",
+    "nom": "oignons jaunes crus épluchés",
+    "ciqual_code": 20034,
+    "ciqual_nom": "Oignon, cru",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Épluchage/parage supposé 10 %.",
+    "kcal": {
+      "bas": 39.0,
+      "haut": 39.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 1.1,
+      "haut": 1.1,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 6.25,
+      "haut": 6.25,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 0.62,
+      "haut": 0.62,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "39",
+      "proteines": "1,1",
+      "glucides": "6,25",
+      "lipides": "0,62"
+    }
+  },
+  "dinde": {
+    "id": "dinde",
+    "nom": "escalope de dinde crue",
+    "ciqual_code": 36304,
+    "ciqual_nom": "Dinde, escalope crue",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Le Gaulois, nature 100 % escalope. Pas de produit pané.",
+    "kcal": {
+      "bas": 108.0,
+      "haut": 108.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 23.7,
+      "haut": 23.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 1.48,
+      "haut": 1.48,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "108",
+      "proteines": "23,7",
+      "glucides": "0",
+      "lipides": "1,48"
+    }
+  },
+  "foie": {
+    "id": "foie",
+    "nom": "foies de volaille confits, graisse comprise",
+    "ciqual_code": 8125,
+    "ciqual_nom": "Confit de foie de volaille",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Code CIQUAL Confit de foie de volaille, aliment moyen gras; pas foie cru. Peser le produit avec sa graisse, ne pas égoutter puis compter comme identique.",
+    "kcal": {
+      "bas": 361.0,
+      "haut": 361.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 13.7,
+      "haut": 13.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 6.22,
+      "haut": 6.22,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 31.0,
+      "haut": 31.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "361",
+      "proteines": "13,7",
+      "glucides": "6,22",
+      "lipides": "31"
+    }
+  },
+  "porc": {
+    "id": "porc",
+    "nom": "filet mignon de porc cru",
+    "ciqual_code": 28204,
+    "ciqual_nom": "Porc, filet mignon cru",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Affichage interprété 15,00 €, recoupé par recherche de la même fiche. À revalider avant claim commercial.",
+    "kcal": {
+      "bas": 123.0,
+      "haut": 123.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 21.2,
+      "haut": 21.2,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.4,
+      "haut": 0.4,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 4.09,
+      "haut": 4.09,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "123",
+      "proteines": "21,2",
+      "glucides": "0,4",
+      "lipides": "4,09"
+    }
+  },
+  "cuisse": {
+    "id": "cuisse",
+    "nom": "chair de cuisse de poulet crue, peau comprise",
+    "ciqual_code": 36002,
+    "ciqual_nom": "Poulet, cuisse, viande et peau crue",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "Prix au poids variable: le calcul emploie 2,90 €/500 g, soit 5,80 €/kg avant os. Rendement chair+peau supposé 65 %. Débarrasser os/cartilage AVANT pesée de la chair crue; recettes sans os.",
+    "kcal": {
+      "bas": 192.0,
+      "haut": 192.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 17.3,
+      "haut": 17.3,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 0.0,
+      "haut": 0.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 13.5,
+      "haut": 13.5,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "192",
+      "proteines": "17,3",
+      "glucides": "0",
+      "lipides": "13,5"
+    }
+  },
+  "pain": {
+    "id": "pain",
+    "nom": "pain de mie complet",
+    "ciqual_code": 7111,
+    "ciqual_nom": "Pain de mie complet, préemballé",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "gluten"
+    ],
+    "notes_correspondance": "Le produit de référence contient des additifs. Le guide ne prétend pas que toute sa liste est sans aliments ultra-transformés.",
+    "kcal": {
+      "bas": 257.0,
+      "haut": 257.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 8.0,
+      "haut": 8.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 41.8,
+      "haut": 41.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 4.1,
+      "haut": 4.1,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "257",
+      "proteines": "8",
+      "glucides": "41,8",
+      "lipides": "4,1"
+    }
+  },
+  "pates": {
+    "id": "pates",
+    "nom": "pâtes sèches de blé dur",
+    "ciqual_code": 9810,
+    "ciqual_nom": "Pâtes sèches, standard, crues",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "gluten"
+    ],
+    "notes_correspondance": "Spaghetti: casser si nécessaire pour soupe. Pas pâtes fraîches.",
+    "kcal": {
+      "bas": 364.0,
+      "haut": 364.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 13.1,
+      "haut": 13.1,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 72.7,
+      "haut": 72.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 1.6,
+      "haut": 1.6,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "364",
+      "proteines": "13,1",
+      "glucides": "72,7",
+      "lipides": "1,6"
+    }
+  },
+  "moutarde": {
+    "id": "moutarde",
+    "nom": "moutarde de Dijon",
+    "ciqual_code": 11013,
+    "ciqual_nom": "Moutarde",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [
+      "moutarde",
+      "sulfites possibles"
+    ],
+    "notes_correspondance": "Vérifier sulfites sur étiquette. Corps/URL cohérents malgré titre/image de fetch erronés.",
+    "kcal": {
+      "bas": 151.0,
+      "haut": 151.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 6.92,
+      "haut": 6.92,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 4.33,
+      "haut": 4.33,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 11.2,
+      "haut": 11.2,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "151",
+      "proteines": "6,92",
+      "glucides": "4,33",
+      "lipides": "11,2"
+    }
+  },
+  "cumin": {
+    "id": "cumin",
+    "nom": "cumin moulu",
+    "ciqual_code": 11042,
+    "ciqual_nom": "Cumin, graine",
+    "source": "ANSES CIQUAL 2025",
+    "source_url": "https://doi.org/10.57745/RDMHWY",
+    "base": "pour 100 g, état indiqué dans le nom CIQUAL",
+    "allergenes": [],
+    "notes_correspondance": "CIQUAL cumin graine, mouture sans ingrédient ajouté. Traces signalées sur la page: gluten, sésame, moutarde, céleri.",
+    "kcal": {
+      "bas": 427.0,
+      "haut": 427.0,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "proteines": {
+      "bas": 17.8,
+      "haut": 17.8,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "glucides": {
+      "bas": 33.7,
+      "haut": 33.7,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "lipides": {
+      "bas": 22.3,
+      "haut": 22.3,
+      "qualificatif": "valeur moyenne publiée"
+    },
+    "valeurs_brutes": {
+      "kcal": "427",
+      "proteines": "17,8",
+      "glucides": "33,7",
+      "lipides": "22,3"
+    }
+  }
+}
