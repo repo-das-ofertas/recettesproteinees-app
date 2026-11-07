@@ -1,6 +1,6 @@
 // Cache version tracks data/PDF releases. Bump VERSION when assets change.
-const VERSION='proteicas-fr-0.2.7-data-v0.3.5';
-const ASSETS=['./','./index.html','./styles.css','./app.js','./config.js','./manifest.webmanifest','./data/recettes.json','./data/nutrition.json','./data/thumbnails.json','./assets/guide-v0.3.5.pdf','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/icon-maskable.png'];
+const VERSION='proteicas-fr-0.2.12-contrato-p-base';
+const ASSETS=['./','./index.html','./styles.css','./app.js','./access.js','./config.js','./manifest.webmanifest','./data/recettes.json','./data/nutrition.json','./data/thumbnails.json','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/icon-maskable.png'];
 const ROOT=new URL('./',self.location).href;
 const allowed=url=>{
   if(url.origin!==new URL(ROOT).origin||!url.href.startsWith(ROOT))return false;
@@ -11,7 +11,7 @@ self.addEventListener('install',e=>e.waitUntil((async()=>{
   const c=await caches.open(VERSION);await c.addAll(ASSETS);
   const recipes=await(await c.match(new URL('./data/recettes.json',ROOT))).json();
   const thumbnails=await(await c.match(new URL('./data/thumbnails.json',ROOT))).json();
-  const images=recipes.filter(r=>r.photo?.illustrative===true&&/^images\/[0-9]+\.webp$/.test(r.photo.fichier||'')).map(r=>'./data/'+r.photo.fichier);
+  const images=recipes.filter(r=>r.photo?.visuel===true&&/^images\/[0-9]+\.webp$/.test(r.photo.fichier||'')).map(r=>'./data/'+r.photo.fichier);
   const thumbs=Object.values(thumbnails).filter(p=>/^\.\/assets\/product-thumbs\/[0-9]+\.webp$/.test(p));
   await c.addAll([...new Set([...images,...thumbs])]);await self.skipWaiting();
 })()));

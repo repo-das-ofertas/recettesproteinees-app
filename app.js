@@ -1,6 +1,10 @@
 import {CONFIG} from './config.js';
 const isProduction=()=>CONFIG.production===true;
-const pdfHref=(hash='')=>`${CONFIG.pdfUrl||'./assets/guide-v0.3.5.pdf'}${hash}`;
+import {accessConfigured, hashEmail, sessionMatches, verifyAccess, RECHECK_MS} from './access.js';
+let restoredBuyer = null, authChecking = false, authGeneration = 0, bonusDownload = null;
+let accessMessage = '';
+const hasBuyerAccess = () => !authChecking && sessionMatches(state.session);
+const hasCatalogAccess = () => hasBuyerAccess() || (!isProduction() && state.session?.mode === 'demo');
 
 const ICONS = {
   search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
@@ -20,7 +24,7 @@ const ICONS = {
   download:'<path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/>',
   trash:'<path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/>'
 };
-const illustrationAlt = r => (r.photo?.alt || ('Illustration de '+r.titre)).replace(/photographie/gi,'représentation');
+const dishAlt = r => (r.photo?.alt || r.titre);
 const icon = (n,size=22) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ICONS.book}</svg>`;
 const clean = s => String(s ?? '').replaceAll(String.fromCharCode(8212), ',');
 const fr = s => clean(s).replace(/ ([?!;])/g, '\u202f$1').replace(/ :/g, '\u00a0:').replace(/« /g, '«\u202f').replace(/ »/g, '\u202f»');
@@ -45,7 +49,10 @@ function readPersistedState(){
     const demoSession = saved.session?.mode === 'demo';
     // Production never restores a demo session (legacy or current key).
     if(demoSession && !isProduction()) state.session = {mode:'demo'};
-    else state.session = null;
+    else if(sessionMatches(saved.session)){
+      if(navigator.onLine) restoredBuyer = saved.session;
+      else state.session = saved.session;
+    }else state.session = null;
     state.favorites = Array.isArray(saved.favorites) ? saved.favorites.filter(x => typeof x === 'string') : [];
     state.shopping = saved.shopping && typeof saved.shopping === 'object' && !Array.isArray(saved.shopping) ? saved.shopping : {};
     if(saved.ui && typeof saved.ui === 'object') state.ui = {...state.ui, ...saved.ui};
@@ -82,7 +89,7 @@ function macro(r,key,precision=1){
 }
 function photo(r,variant='detail'){
   const source=r.photo;
-  if(!source || source.illustrative!==true || typeof source.fichier!=='string' || !/^images\/[0-9]+\.webp$/.test(source.fichier))return null;
+  if(!source || source.visuel!==true || typeof source.fichier!=='string' || !/^images\/[0-9]+\.webp$/.test(source.fichier))return null;
   const thumb=thumbnails[String(r.id)];
   if(variant==='card' && typeof thumb==='string' && /^\.\/assets\/product-thumbs\/[0-9]+\.webp$/.test(thumb))return thumb;
   return './data/'+source.fichier;
@@ -108,12 +115,12 @@ function chapterArt(r,size=40){
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[r.chapitre]||ICONS.book}</svg>`;
 }
 function brand(){return `<div class="brand"><img src="./assets/icon.svg" width="38" height="38" alt=""><div><strong>Recettes protéinées</strong><div class="eyebrow">Le carnet de cuisine</div></div></div>`;}
-function nav(active){return `<nav class="nav" aria-label="Navigation principale">${[['recettes','book','Recettes'],['favoris','heart','Favoris'],['courses','basket','Courses']].map(([path,i,label]) => `<a href="#${path}" aria-label="${label}" ${active===path?'aria-current="page"':''}>${icon(i)}<span>${label}</span>${path==='courses' && shoppingEntries().length?`<span class="badge" aria-label="${ingredientCount(shoppingEntries().length)}">${shoppingEntries().length}</span>`:''}</a>`).join('')}</nav>`;}
+function nav(active){return `<nav class="nav" aria-label="Navigation principale">${[['recettes','book','Recettes'],['favoris','heart','Favoris'],['courses','basket','Courses'],...(hasBuyerAccess()?[['bonus','download','Bonus']]:[])].map(([path,i,label]) => `<a href="#${path}" aria-label="${label}" ${active===path?'aria-current="page"':''}>${icon(i)}<span>${label}</span>${path==='courses' && shoppingEntries().length?`<span class="badge" aria-label="${ingredientCount(shoppingEntries().length)}">${shoppingEntries().length}</span>`:''}</a>`).join('')}</nav>`;}
 function shell(content,active){return fr(`<div class="shell"><header class="topbar">${brand()}<button class="icon-btn" data-action="info" aria-label="À propos et installation">${icon('info',20)}</button></header><div id="toast" role="status" aria-live="polite"></div>${!storageOK?'<p class="storage-warning">Stockage indisponible : la sauvegarde après fermeture n’est pas garantie.</p>':''}<main id="main" class="main fade">${content}</main>${nav(active)}</div>`);}
 function status(){return !navigator.onLine?'Hors ligne':offlineReady?'Disponible hors ligne':'Préparation hors ligne…';}
 function footer(){return `<footer class="footnote"><div class="network ${!navigator.onLine?'offline':''}"><i></i><span data-network>${status()}</span></div><p>Votre carnet sur cet appareil<br>Macros théoriques et coûts estimés, pas de prix garanti.</p><button data-action="info">Sources, limites et installation</button></footer>`;}
 function heart(r,detail=false){return `<button class="heart ${detail?'favorite-top':''}" data-action="favorite" data-id="${esc(r.id)}" aria-pressed="${isFav(r.id)}" aria-label="${isFav(r.id)?'Retirer des favoris':'Ajouter aux favoris'} : ${esc(r.titre)}">${icon('heart',21)}</button>`;}
-function card(r){const img=photo(r,'card');return `<article class="recipe-card" data-recipe-id="${esc(r.id)}"><a class="card-open" href="#recette/${encodeURIComponent(r.id)}"><div class="card-art">${img?`<img src="${esc(img)}" alt="${esc(illustrationAlt(r))}" loading="lazy" decoding="async" width="400" height="300"><span class="illustration-label">Illustration générée, non contractuelle</span>`:`<div class="chapter-fallback chapter-${r.chapitre}">${chapterArt(r,46)}<span>Recette ${String(r.id).padStart(3,'0')}</span></div>`}</div><div class="card-content"><p class="eyebrow">Chapitre ${String(r.chapitre).padStart(2,'0')}</p><h3>${esc(r.titre)}</h3><span class="protein">${macro(r,'proteines')} g de protéines</span><div class="card-meta"><span>${icon('clock',12)} ${number(r.temps_indicatif_min,0)} min</span><span>≈ ${euros(r.cout_portion_eur)}</span></div></div></a>${heart(r)}</article>`;}
+function card(r){const img=photo(r,'card');return `<article class="recipe-card" data-recipe-id="${esc(r.id)}"><a class="card-open" href="#recette/${encodeURIComponent(r.id)}"><div class="card-art">${img?`<img src="${esc(img)}" alt="${esc(dishAlt(r))}" loading="lazy" decoding="async" width="400" height="300">`:`<div class="chapter-fallback chapter-${r.chapitre}">${chapterArt(r,46)}<span>Recette ${String(r.id).padStart(3,'0')}</span></div>`}</div><div class="card-content"><p class="eyebrow">Chapitre ${String(r.chapitre).padStart(2,'0')}</p><h3>${esc(r.titre)}</h3><span class="protein">${macro(r,'proteines')} g de protéines</span><div class="card-meta"><span>${icon('clock',12)} ${number(r.temps_indicatif_min,0)} min</span><span>≈ ${euros(r.cout_portion_eur)}</span></div></div></a>${heart(r)}</article>`;}
 const DIFFICULTY_LABELS = Object.freeze({facile:'Facile',moyen:'Moyenne',difficile:'Difficile'});
 function activeFilters(){return [ui().difficulty?`Difficulté : ${DIFFICULTY_LABELS[ui().difficulty].toLocaleLowerCase('fr-FR')}`:null,ui().minProtein>0?`≥ ${number(ui().minProtein,0)} g de protéines`:null,ui().maxCost!==null?`≤ ${euros(ui().maxCost)}`:null,ui().maxTime!==null?`≤ ${number(ui().maxTime,0)} min`:null].filter(Boolean);}
 function filterRecipes(favorites=false){
@@ -136,27 +143,89 @@ function updateResults(){
 function detail(r){
  if(!r)return shell(empty('book','Recette introuvable','Cette fiche ne fait pas partie de la collection chargée.','Revenir aux recettes'),'recettes');
  const img=photo(r);
- return shell(`<article class="detail"><div class="back-row"><a href="#${state.lastList==='favoris'?'favoris':'recettes'}">${icon('back',19)} Retour aux recettes</a>${heart(r,true)}</div><p class="eyebrow">Fiche ${String(r.id).padStart(2,'0')} · ${esc(r.categorie)}</p><h1 tabindex="-1">${esc(r.titre)}</h1><div class="detail-summary"><span class="difficulty-pill">Difficulté : ${esc(DIFFICULTY_LABELS[r.difficulte] || r.difficulte)}</span><span>${icon('clock',16)} Temps indicatif : ${number(r.temps_indicatif_min,0)} min</span><span>≈ ${euros(r.cout_portion_eur)} / portion</span></div><div class="recipe-cover">${img?`<figure><img src="${esc(img)}" alt="${esc(illustrationAlt(r))}" width="400" height="300" fetchpriority="high"><figcaption>Illustration générée, non contractuelle</figcaption></figure>`:`<div><div class="big">${macro(r,'proteines')}<span style="font-size:23px;letter-spacing:0"> g</span></div><p class="small">de protéines par portion</p></div><div class="recipe-no">${chapterArt(r,65)}<span>Chapitre ${String(r.chapitre).padStart(2,'0')}</span></div>`}</div><section class="metrics" aria-label="Valeurs théoriques par portion">${[['kcal','kcal',0],['proteines','Protéines (g)',1],['glucides','Glucides (g)',1],['lipides','Lipides (g)',1]].map(([key,label,precision])=>`<div class="metric"><strong>${macro(r,key,precision)}</strong><span>${label}</span></div>`).join('')}</section><p class="estimate">Par portion. Calculs théoriques à partir d’ANSES CIQUAL 2025. Les intervalles reflètent les limites des données sources.</p><section><div class="subhead"><h2>Ingrédients</h2><span class="portion">${number(r.portions,0)} portion${r.portions>1?'s':''}</span></div><p class="small muted">Quantités pour la recette entière.</p><ul class="ingredients">${Object.entries(r.ingredients_g).map(([key,grams])=>`<li><span>${esc(ingredientName(key))}</span><strong>${number(grams)} g</strong></li>`).join('')}${r.eau?`<li><span>Eau</span><strong>${esc(r.eau)}</strong></li>`:''}</ul><button class="btn" data-action="add-shopping" data-id="${esc(r.id)}">${icon('plus',19)} Ajouter aux courses</button><p class="small muted" style="margin-top:9px">Le lot entier est ajouté. L’eau n’est pas ajoutée aux courses.</p></section><section class="preparation"><h2>La préparation</h2><ol class="steps">${r.etapes.map(step=>`<li><span>${esc(step)}</span></li>`).join('')}</ol></section>${r.materiel?`<div class="notice"><strong>Matériel</strong>${esc(Array.isArray(r.materiel)?r.materiel.join(', '):r.materiel)}</div>`:''}${r.note?`<div class="notice recipe-note"><strong>À garder en tête</strong>${esc(r.note)}</div>`:''}<section class="notice conservation"><h2>Conservation</h2><p class="conservation-text">${esc(r.conservation)}</p></section>${/bonus/i.test(r.note||'')?'<a class="bonus-link" href="./assets/guide-v0.3.5.pdf#page=390" target="_blank" rel="noopener">Voir l’organisation de la semaine dans le guide inclus ↗</a>':''}<div class="notice allergens"><strong>Allergènes indiqués</strong>${r.allergenes?.length?esc(r.allergenes.join(', ')):'Aucun allergène renseigné dans cette fiche.'}<p style="margin-top:7px">Vérifiez toujours les étiquettes et les traces éventuelles.</p></div><p class="estimate detail-end">Coût estimé : ${euros(r.cout_portion_eur)} par portion, selon les quantités utilisées. Le montant du panier peut être différent. Eau, énergie et équipement non compris. Ce carnet n’est pas un régime personnalisé.</p><a class="btn outline pdf-link" href="./assets/guide-v0.3.5.pdf#page=${r.page_pdf}" target="_blank" rel="noopener">Ouvrir cette fiche dans le guide PDF ↗</a>${footer()}</article>`,'recettes');
+ return shell(`<article class="detail"><div class="back-row"><a href="#${state.lastList==='favoris'?'favoris':'recettes'}">${icon('back',19)} Retour aux recettes</a>${heart(r,true)}</div><p class="eyebrow">Fiche ${String(r.id).padStart(2,'0')} · ${esc(r.categorie)}</p><h1 tabindex="-1">${esc(r.titre)}</h1><div class="detail-summary"><span class="difficulty-pill">Difficulté : ${esc(DIFFICULTY_LABELS[r.difficulte] || r.difficulte)}</span><span>${icon('clock',16)} Temps indicatif : ${number(r.temps_indicatif_min,0)} min</span><span>≈ ${euros(r.cout_portion_eur)} / portion</span></div><div class="recipe-cover">${img?`<figure><img src="${esc(img)}" alt="${esc(dishAlt(r))}" width="400" height="300" fetchpriority="high"></figure>`:`<div><div class="big">${macro(r,'proteines')}<span style="font-size:23px;letter-spacing:0"> g</span></div><p class="small">de protéines par portion</p></div><div class="recipe-no">${chapterArt(r,65)}<span>Chapitre ${String(r.chapitre).padStart(2,'0')}</span></div>`}</div><section class="metrics" aria-label="Valeurs théoriques par portion">${[['kcal','kcal',0],['proteines','Protéines (g)',1],['glucides','Glucides (g)',1],['lipides','Lipides (g)',1]].map(([key,label,precision])=>`<div class="metric"><strong>${macro(r,key,precision)}</strong><span>${label}</span></div>`).join('')}</section><p class="estimate">Par portion. Calculs théoriques à partir d’ANSES CIQUAL 2025. Les intervalles reflètent les limites des données sources.</p><section><div class="subhead"><h2>Ingrédients</h2><span class="portion">${number(r.portions,0)} portion${r.portions>1?'s':''}</span></div><p class="small muted">Quantités pour la recette entière.</p><ul class="ingredients">${Object.entries(r.ingredients_g).map(([key,grams])=>`<li><span>${esc(ingredientName(key))}</span><strong>${number(grams)} g</strong></li>`).join('')}${r.eau?`<li><span>Eau</span><strong>${esc(r.eau)}</strong></li>`:''}</ul><button class="btn" data-action="add-shopping" data-id="${esc(r.id)}">${icon('plus',19)} Ajouter aux courses</button><p class="small muted" style="margin-top:9px">Le lot entier est ajouté. L’eau n’est pas ajoutée aux courses.</p></section><section class="preparation"><h2>La préparation</h2><ol class="steps">${r.etapes.map(step=>`<li><span>${esc(step)}</span></li>`).join('')}</ol></section>${r.materiel?`<div class="notice"><strong>Matériel</strong>${esc(Array.isArray(r.materiel)?r.materiel.join(', '):r.materiel)}</div>`:''}${r.note?`<div class="notice recipe-note"><strong>À garder en tête</strong>${esc(r.note)}</div>`:''}<section class="notice conservation"><h2>Conservation</h2><p class="conservation-text">${esc(r.conservation)}</p></section>${/bonus/i.test(r.note||'')?(hasBuyerAccess()?'<a class="bonus-link" href="#bonus">Retrouver le guide dans Bonus ↗</a>':''):''}<div class="notice allergens"><strong>Allergènes indiqués</strong>${r.allergenes?.length?esc(r.allergenes.join(', ')):'Aucun allergène renseigné dans cette fiche.'}<p style="margin-top:7px">Vérifiez toujours les étiquettes et les traces éventuelles.</p></div><p class="estimate detail-end">Coût estimé : ${euros(r.cout_portion_eur)} par portion, selon les quantités utilisées. Le montant du panier peut être différent. Eau, énergie et équipement non compris. Ce carnet n’est pas un régime personnalisé.</p>${hasBuyerAccess()?'<a class="btn outline pdf-link" href="#bonus">Retrouver le guide PDF dans Bonus ↗</a>':''}${footer()}</article>`,'recettes');
 }
 function courses(){
  const entries=shoppingEntries(),done=entries.filter(([,v])=>v.checked).length;
  return shell(`<section class="shopping-panel"><div class="intro"><div><p class="eyebrow">Pour la prochaine fois</p><h1>Votre liste de courses</h1></div></div><p class="list-intro">Les ingrédients de vos recettes, réunis au même endroit.</p>${entries.length?`<div class="progress-card"><div class="top"><strong>${done} sur ${entries.length}</strong><small>${done===1?'ingrédient coché':'ingrédients cochés'}</small></div><div class="progress-track" role="progressbar" aria-label="Courses terminées" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${entries.length}"><div style="width:${done/entries.length*100}%"></div></div></div><ul class="shopping-items">${entries.sort(([a],[b])=>ingredientName(a).localeCompare(ingredientName(b),'fr')).map(([key,item])=>`<li class="${item.checked?'done':''}"><label><input type="checkbox" data-shopping="${esc(key)}" ${item.checked?'checked':''}><span>${esc(ingredientName(key))}<span class="weight">${number(item.grams)} g au total</span></span></label><button class="remove" data-action="remove-item" data-key="${esc(key)}" aria-label="Retirer ${esc(ingredientName(key))}">${icon('close',17)}</button></li>`).join('')}</ul><div class="shopping-actions"><button class="btn secondary" data-action="clear-checked">${icon('check',16)} Retirer les ingrédients cochés</button><button class="btn outline" data-action="clear-list">${icon('trash',16)} Vider la liste</button></div><p class="footnote">Poids nets additionnés pour les lots entiers ajoutés. Ce n’est pas une liste d’emballages à acheter. Ajouter deux fois une recette double ses ingrédients.</p>`:empty('basket','Prêt pour les courses ?','Ouvrez une recette et ajoutez ses ingrédients. Ils seront regroupés ici.','Choisir une recette')}${footer()}</section>`,'courses');
 }
+function closeAccessDialogs(){
+ document.querySelectorAll('dialog[open]').forEach(d=>d.close());
+ bonusDownload?.abort();
+}
+async function checkBuyer(h){
+ const generation=++authGeneration;
+ authChecking=true;accessMessage='Vérification de votre accès…';
+ closeAccessDialogs();render();
+ try{
+  const session=await verifyAccess(h);
+  if(generation!==authGeneration)return false;
+  state.session=session;restoredBuyer=null;accessMessage='';save();
+  return true;
+ }catch(error){
+  if(generation!==authGeneration)return false;
+  state.session=null;restoredBuyer=null;save();
+  accessMessage=error.denied
+   ?'Nous ne pouvons pas confirmer un accès actif pour cet e-mail. Vérifiez l’adresse utilisée lors de l’achat.'
+   :'Impossible de vérifier votre accès. Vérifiez votre connexion, puis réessayez. Le carnet reste fermé.';
+  return false;
+ }finally{
+  if(generation===authGeneration){authChecking=false;render();}
+ }
+}
+async function revalidateBuyer(){
+ if(!isProduction() || authChecking || !navigator.onLine)return false;
+ const session=state.session||restoredBuyer;
+ if(!sessionMatches(session))return false;
+ return checkBuyer(session.h);
+}
+function bonus(){
+ return shell(`<section class="bonus-panel"><p class="eyebrow">Votre carnet, à emporter</p><h1>Votre bonus</h1><p>Le guide complet v0.3.6, à garder avec vos recettes.</p><p class="small muted">Une connexion Internet est nécessaire pour télécharger le guide.</p><button class="btn" data-action="download-bonus">${icon('download',20)} Télécharger le guide PDF</button><p id="bonus-status" role="status" aria-live="polite"></p>${footer()}</section>`,'bonus');
+}
+async function downloadBonus(){
+ if(!hasBuyerAccess())return;
+ if(navigator.onLine && !await revalidateBuyer())return;
+ if(!hasBuyerAccess())return;
+ const generation=authGeneration;
+ const controller=new AbortController();bonusDownload=controller;
+ const button=document.querySelector('[data-action="download-bonus"]');
+ if(button)button.disabled=true;
+ try{
+  if(!CONFIG.bonusAsset)throw Error('missing');
+  const response=await fetch(CONFIG.bonusAsset,{cache:'no-store',credentials:'omit',signal:controller.signal});
+  if(!response.ok || !response.headers.get('content-type')?.includes('application/pdf'))throw Error('pdf');
+  const blob=await response.blob();
+  if(!hasBuyerAccess() || generation!==authGeneration)return;
+  const url=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download='guide-recettes-proteinees-v0.3.6.pdf';
+  link.click();setTimeout(()=>URL.revokeObjectURL(url),30000);
+  const status=document.querySelector('#bonus-status');
+  if(status)status.textContent='Votre téléchargement est prêt.';
+ }catch{
+  const status=document.querySelector('#bonus-status');
+  if(status)status.textContent='Le guide n’a pas pu être téléchargé. Vérifiez votre connexion, puis réessayez.';
+ }finally{
+  if(bonusDownload===controller)bonusDownload=null;
+  const current=document.querySelector('[data-action="download-bonus"]');if(current)current.disabled=false;
+ }
+}
 function login(){
  if(isProduction()){
-  app.innerHTML=fr(`<div class="login"><header class="login-top">${brand()}</header><main id="main" class="login-main fade"><div class="login-illustration"><img src="./assets/icon.svg" width="122" height="122" alt=""></div><p class="eyebrow" style="color:var(--rust)">Bienvenue</p><h1>La cuisine commence ici.</h1><p class="login-description">L’accès à ce carnet s’ouvre après confirmation du paiement. Les instructions d’accès seront envoyées séparément.</p><p class="demo-info" role="status">L’ouverture acheteur n’est pas encore branchée ici. Aucun code d’accès n’est publié sur cette page.</p></main><footer class="login-note">Favoris et courses restent sur cet appareil après ouverture.</footer></div>`);
+  const configured=accessConfigured();
+  app.innerHTML=fr(`<div class="login"><header class="login-top">${brand()}</header><main id="main" class="login-main fade"><div class="login-hero"><img src="./assets/icon.svg" width="122" height="122" alt=""></div><p class="eyebrow" style="color:var(--rust)">Bienvenue</p><h1>La cuisine commence ici.</h1>${configured?`<p class="login-description">Saisissez l’e-mail utilisé lors de votre achat pour ouvrir votre carnet.</p><form id="login-form"><label class="field-label" for="access">Votre e-mail d’achat</label><input id="access" name="access" type="email" required autocomplete="email" autocapitalize="none" spellcheck="false" aria-describedby="login-error" ${authChecking?'disabled':''}><p id="login-error" class="login-error" role="alert">${esc(accessMessage)}</p><button type="submit" class="btn" ${authChecking?'disabled':''}>${authChecking?'Vérification…':'Ouvrir mon carnet'} ${icon('arrow',17)}</button></form>`:'<p class="login-description" role="status">L’accès à ce carnet n’est pas encore disponible. Réessayez plus tard.</p>'}</main><footer class="login-note">Favoris et courses restent sur cet appareil après ouverture.</footer></div>`);
   return;
  }
  const demoCode=(CONFIG.demoCodes&&CONFIG.demoCodes[0])||'';
  const demoEmail=(CONFIG.demoEmails&&CONFIG.demoEmails[0])||'';
- app.innerHTML=fr(`<div class="login"><header class="login-top">${brand()}<span class="demo-tag">Démo locale</span></header><main id="main" class="login-main fade"><div class="login-illustration"><img src="./assets/icon.svg" width="122" height="122" alt=""></div><p class="eyebrow" style="color:var(--rust)">Bienvenue dans votre carnet</p><h1>La cuisine commence ici.</h1><p class="login-description">Retrouvez vos recettes, gardez vos favoris et préparez vos courses.</p><form id="login-form"><label class="field-label" for="access">E-mail de démonstration ou code d’accès</label><input id="access" name="access" type="text" required autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="${esc(demoCode)}" aria-describedby="demo-help login-error"><p id="login-error" class="login-error" role="alert"></p><button type="submit" class="btn">Ouvrir mon carnet ${icon('arrow',17)}</button></form><p id="demo-help" class="demo-info">Préversion de démonstration locale uniquement. Utilisez <code>${esc(demoCode)}</code> ou <code>${esc(demoEmail)}</code>.<br>Aucun achat n’est vérifié. N’entrez pas votre véritable e-mail d’achat.</p></main><footer class="login-note">Aucune donnée envoyée. Vos favoris et vos courses restent sur cet appareil.</footer></div>`);
+ app.innerHTML=fr(`<div class="login"><header class="login-top">${brand()}<span class="demo-tag">Démo locale</span></header><main id="main" class="login-main fade"><div class="login-hero"><img src="./assets/icon.svg" width="122" height="122" alt=""></div><p class="eyebrow" style="color:var(--rust)">Bienvenue dans votre carnet</p><h1>La cuisine commence ici.</h1><p class="login-description">Retrouvez vos recettes, gardez vos favoris et préparez vos courses.</p><form id="login-form"><label class="field-label" for="access">E-mail de démonstration ou code d’accès</label><input id="access" name="access" type="text" required autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="${esc(demoCode)}" aria-describedby="demo-help login-error"><p id="login-error" class="login-error" role="alert"></p><button type="submit" class="btn">Ouvrir mon carnet ${icon('arrow',17)}</button></form><p id="demo-help" class="demo-info">Préversion de démonstration locale uniquement. Utilisez <code>${esc(demoCode)}</code> ou <code>${esc(demoEmail)}</code>.<br>Aucun achat n’est vérifié. N’entrez pas votre véritable e-mail d’achat.</p></main><footer class="login-note">Aucune donnée envoyée. Vos favoris et vos courses restent sur cet appareil.</footer></div>`);
 }
 function render(){
- if(!state.session){login();return;}
+ if(!hasCatalogAccess()){login();return;}
  const hash=location.hash.slice(1), parts=hash.split('/');
- currentRoute=['favoris','courses'].includes(parts[0])?parts[0]:parts[0]==='recette'?'detail':'recettes';
+ currentRoute=['favoris','courses',...(hasBuyerAccess()?['bonus']:[])].includes(parts[0])?parts[0]:parts[0]==='recette'?'detail':'recettes';
  if(currentRoute==='recettes'||currentRoute==='favoris'){state.lastList=currentRoute;app.innerHTML=catalog(currentRoute==='favoris');updateResults();}
  else if(currentRoute==='courses')app.innerHTML=courses();
+ else if(currentRoute==='bonus')app.innerHTML=bonus();
  else app.innerHTML=detail(find(decodeURIComponent(parts[1]||'')));
 }
 function openFilters(){
@@ -167,18 +236,24 @@ function openFilters(){
 function info(){
  const d=document.querySelector('#info');
  const accessBlock=isProduction()
-  ?`<details class="info-details"><summary>Vos données et l’accès</summary><p>Favoris et courses restent dans ce navigateur, sans synchronisation. Effacer les données du navigateur les supprime. Aucun e-mail, code saisi ou détail d’achat n’est enregistré.</p><p>L’accès acheteur sera confirmé après paiement. Cette page n’ouvre pas encore l’accès payant.</p></details>`
+  ?`<details class="info-details"><summary>Vos données et l’accès</summary><p>Favoris et courses restent dans ce navigateur, sans synchronisation. Effacer les données du navigateur les supprime. L’empreinte de votre e-mail et la dernière confirmation d’accès sont enregistrées sur cet appareil. L’adresse saisie n’y est pas conservée en clair.</p><p>L’accès est revérifié à l’ouverture et au retour de la connexion. Sans vérification possible en ligne, le carnet reste fermé.</p></details>`
   :`<details class="info-details"><summary>Vos données et l’accès</summary><p>Favoris et courses restent dans ce navigateur, sans synchronisation. Effacer les données du navigateur les supprime. Aucun e-mail, code saisi ou détail d’achat n’est enregistré.</p><p>Cet accès de démonstration locale ne vérifie aucun achat et ne constitue pas un accès client.</p></details>`;
  const contact=isProduction()?'':`<p class="small muted">Contacter l'assistance : <!-- CONTATO NAO VERIFICADO --><a href="mailto:support@recettesproteinees.fr">support@recettesproteinees.fr</a></p>`;
  const logoutLabel=isProduction()?'Fermer la session':'Fermer la session locale';
- d.innerHTML=fr(`<div class="dialog-head"><h2 id="info-title">Votre carnet</h2><button class="icon-btn" data-close="info" aria-label="Fermer les informations">${icon('close',19)}</button></div><div class="info-body"><section class="info-block"><h3>Emportez-le en cuisine</h3><p>Après le téléchargement complet, les recettes restent disponibles hors ligne si votre navigateur autorise le stockage local.</p><p>${offlineReady?'Votre carnet est prêt pour une utilisation hors ligne.':'Gardez cette page ouverte le temps du téléchargement.'}</p><p>Sur iPhone : Safari, Partager, puis « Sur l’écran d’accueil ». Sur Android : menu du navigateur, puis « Installer l’application », si proposé.</p>${installPrompt?'<button class="btn secondary" data-action="install">Installer le carnet</button>':''}</section><details class="info-details"><summary>Sources et repères</summary><p>Macros théoriques calculées à partir des données de la table Ciqual 2025 de l’Anses. Certaines correspondances sont des approximations documentées dans le guide. Source : ANSES, Licence Ouverte 2.0.</p><p>Coûts estimés selon les quantités utilisées, sans garantie de prix ou de stock. Eau, énergie et équipement exclus. Temps indicatifs et difficulté éditoriale. Ces recettes n’ont pas été testées en cuisine.</p><p>Vérifiez les étiquettes, allergènes, consignes de conservation et cuisson complète. Ce carnet ne remplace pas un conseil médical ou nutritionnel.</p><p>Ces illustrations sont générées, non contractuelles. Elles ne prouvent ni un résultat de cuisson ni une portion mesurée.</p></details>${accessBlock}${contact}<a class="bonus-link" href="${pdfHref('#page=390')}" target="_blank" rel="noopener">Organisation de la semaine dans le guide inclus ↗</a></div><button class="btn outline" data-action="logout">${logoutLabel}</button>`);d.showModal();
+ d.innerHTML=fr(`<div class="dialog-head"><h2 id="info-title">Votre carnet</h2><button class="icon-btn" data-close="info" aria-label="Fermer les informations">${icon('close',19)}</button></div><div class="info-body"><section class="info-block"><h3>Emportez-le en cuisine</h3><p>Après le téléchargement complet, les recettes restent disponibles hors ligne si votre navigateur autorise le stockage local.</p><p>${offlineReady?'Votre carnet est prêt pour une utilisation hors ligne.':'Gardez cette page ouverte le temps du téléchargement.'}</p><p>Sur iPhone : Safari, Partager, puis « Sur l’écran d’accueil ». Sur Android : menu du navigateur, puis « Installer l’application », si proposé.</p>${installPrompt?'<button class="btn secondary" data-action="install">Installer le carnet</button>':''}</section><details class="info-details"><summary>Sources et repères</summary><p>Macros théoriques calculées à partir des données de la table Ciqual 2025 de l’Anses. Certaines correspondances sont des approximations documentées dans le guide. Source : ANSES, Licence Ouverte 2.0.</p><p>Coûts estimés selon les quantités utilisées, sans garantie de prix ou de stock. Eau, énergie et équipement exclus. Temps indicatifs et difficulté éditoriale. Ces recettes n’ont pas été testées en cuisine.</p><p>Vérifiez les étiquettes, allergènes, consignes de conservation et cuisson complète. Ce carnet ne remplace pas un conseil médical ou nutritionnel.</p></details>${accessBlock}${contact}${hasBuyerAccess()?'<a class="bonus-link" href="#bonus">Retrouver votre guide dans Bonus ↗</a>':''}</div><button class="btn outline" data-action="logout">${logoutLabel}</button>`);d.showModal();
 }
 function confirmClear(){const d=document.querySelector('#confirmation');d.innerHTML=fr(`<div class="dialog-head"><h2 id="confirm-title">Vider la liste de courses ?</h2></div><p class="dialog-copy" style="margin-bottom:22px">Tous les ingrédients seront retirés. Vos recettes favorites seront conservées.</p><div class="info-actions"><button class="btn" data-action="confirm-clear">Oui, vider la liste</button><button class="btn outline" data-close="confirmation">Garder ma liste</button></div>`);d.showModal();}
 
-document.addEventListener('submit',e=>{
+document.addEventListener('submit',async e=>{
  if(e.target.id==='login-form'){
   e.preventDefault();
-  if(isProduction()){document.querySelector('#login-error').textContent='L’accès acheteur n’est pas encore disponible sur cette page.';return;}
+  if(isProduction()){
+   if(!accessConfigured()||authChecking)return;
+   const email=e.target.elements.access.value;
+   try{await checkBuyer(await hashEmail(email));}
+   catch{accessMessage='Impossible de vérifier votre accès. Vérifiez votre connexion, puis réessayez. Le carnet reste fermé.';state.session=null;save();render();}
+   return;
+  }
   const value=e.target.elements.access.value.trim();
   // Explicit local allowlist only. This is NOT authentication or proof of purchase.
   const codes=CONFIG.demoCodes||[]; const emails=CONFIG.demoEmails||[];
@@ -206,7 +281,9 @@ document.addEventListener('click',async e=>{
  if(category){ui().category=category.dataset.category;collapseHero();save();document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.category===ui().category));updateResults();return;}
  const close=e.target.closest('[data-close]');if(close){document.getElementById(close.dataset.close)?.close();return;}
  const b=e.target.closest('[data-action]');if(!b)return;
+ if(!hasCatalogAccess())return;
  switch(b.dataset.action){
+ case 'download-bonus':await downloadBonus();break;
  case 'info': info();break;
  case 'filters':collapseHero();openFilters();break;
  case 'favorite': {
@@ -230,13 +307,16 @@ document.addEventListener('click',async e=>{
  case 'reset-filters':ui().minProtein=0;ui().maxCost=null;ui().maxTime=null;ui().difficulty='';save();document.querySelector('#filters').close();render();break;
  case 'reset-search':resetUI();save();render();break;
  case 'clear-search':ui().query='';save();document.querySelector('#search').value='';b.hidden=true;updateResults();document.querySelector('#search').focus();break;
- case 'logout':state.session=null;save();document.querySelector('#info').close();login();break;
+ case 'logout':++authGeneration;authChecking=false;restoredBuyer=null;accessMessage='';state.session=null;save();closeAccessDialogs();render();break;
  case 'install':if(installPrompt){await installPrompt.prompt();installPrompt=null;document.querySelector('#info').close();}break;
  }
 });
 window.addEventListener('hashchange',()=>{document.querySelectorAll('dialog[open]').forEach(d=>d.close());render();window.scrollTo({top:0,behavior:'instant'});const heading=document.querySelector('#main h1');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}});
 function updateNetwork(){document.querySelectorAll('[data-mode]').forEach(el=>el.textContent=navigator.onLine?(isProduction()?'En ligne':'Démo'):'Hors ligne');document.querySelectorAll('[data-network]').forEach(el=>{el.textContent=status();el.parentElement.classList.toggle('offline',!navigator.onLine);});}
-window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);
+window.addEventListener('online',()=>{updateNetwork();void revalidateBuyer();});window.addEventListener('offline',updateNetwork);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')void revalidateBuyer();});
+window.addEventListener('focus',()=>{void revalidateBuyer();});
+setInterval(()=>{if(document.visibilityState==='visible')void revalidateBuyer();},RECHECK_MS);
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
 async function load(){
  try{
@@ -262,7 +342,7 @@ async function load(){
   filters.maxTime=Number.isFinite(filters.maxTime)?Math.max(5,Math.min(maxTime,filters.maxTime)):null;
   filters.difficulty=['facile','moyen','difficile'].includes(filters.difficulty)?filters.difficulty:'';
   }
-  render();
+  if(restoredBuyer && navigator.onLine)await revalidateBuyer();else render();
  }catch(error){app.innerHTML=fr(`<main id="main" class="loading"><h1>Le carnet ne s’ouvre pas.</h1><p>Impossible de charger les recettes. Vérifiez la connexion, puis réessayez.</p><button class="btn" style="max-width:220px" id="retry">Réessayer</button></main>`);document.querySelector('#retry').onclick=()=>location.reload();}
 }
 document.addEventListener('toggle',e=>{if(e.target.id==='collection-hero'){state.heroOpen=e.target.open;save();}},true);
